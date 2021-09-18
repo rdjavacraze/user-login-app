@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Create/Update User</title>
+
+<script type="text/javascript" th:src="@{/jquery-3.5.1.min.js}"></script>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+	/* 	$('#addbtn').click(function(){
+			
+			var rowCount=$('#myTable > tbody > tr').length;
+			var tblContent='<table><tr><form th:action="@{createUpdateUser}" method="get" modelAttribute="userFormData">';
+			var formData='<td><input type="text" name="id" disabled="disabled" value='+ (rowCount+1)+'></td></td>'
+			formData=formData+'<td><input type="text" name="username" value=""/></td>'
+			formData=formData+'<td><input type="password" name="password" value=""/></td>'
+			formData=formData+'<td><input type="submit" value="Submit"/></td>'
+			var formEnd='</form></tr></table>';	
+			
+			tblContent=tblContent+formData+formEnd;
+			$('#createDiv').html(tblContent);
+			
+			
+			
+		});
+		 */
+		
+		$('#editBtn').click(function(){
+			$("[name='username']").prop('disabled',false);
+			$("[name='password']").prop('disabled',false);
+		});
+		
+		
+	
+	});
+</script>
+
+
+<style type="text/css">
+    #editBtn  {
+    width: 100px;
+    height: 100px;
+    padding: 2px;
+    margin: 2px;
+}
+
+.flex-container {
+    display: flex;
+    margin-left: 226px;
+    
+}
+
+.flex-child {
+   flex: 0;
+  
+}  
+
+.form-submit-button {
+    position: relative;
+  display: block;
+  width: 200px;
+  height: 36px;
+  border-radius: 18px;
+  background-color: #1c89ff;
+  border: solid 1px transparent;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all .1s ease-in-out;
+  &:hover {
+    background-color: transparent;
+    border-color: #fff;
+    transition: all .1s ease-in-out;
+  }
+}
+
+</style>
+
+<!-- <link rel="icon" href="data:,"> -->
+
+
+</head>
+<body>
+
+
+ <h1 align="center">Available Users</h1>
+	<div class="flex-container" align="center">
+
+		<div class="flex-child magenta">
+			<table id="myTable">
+				<thead>
+					<tr>
+						<th>Sr.No.</th>
+						<th>User Name</th>
+						<th>Password</th>
+						
+					</tr>
+				</thead>
+				<form class="create-frm" method="post"
+						modelAttribute="userFormData" th:action="@{submitForm}">
+				<tbody>
+					
+						<tr th:each="user:${users}">
+
+
+							<td><input type="text" name="id" th:value="${user.id}"
+								disabled="disabled"></td>
+							<td><input type="text" name="username"
+								th:value="${user.username}" disabled="disabled"></td>
+							<td><input type="password" name="password"
+								th:value="${user.password}" disabled="disabled"></td>
+						
+						</tr>
+						
+					</tbody>
+					<tfoot>
+					
+					<tr><td></td><td><input type="submit" value="Submit" class="form-submit-button" /></td>	</tr>
+					</tfoot> 
+					</form>
+				    
+				
+				 
+			</table>
+			
+		
+		</div>
+	<div class="flex-child green">
+		<table id="actTable">
+		  <thead>
+		   <tr><th>Action</th></tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		 <td>   <input type="image" th:src="@{/images/editimage.PNG}"
+							 id="editBtn">  <td>
+		    </tr>
+		  </tbody>
+		</table>
+		</div>
+		
+
+	</div>
+	<!-- <div align="center" id="createDiv"></div> -->
+</body>
+</html>
